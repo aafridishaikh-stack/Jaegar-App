@@ -1,0 +1,13 @@
+<div class="orders">
+  <h3>Orders</h3>
+
+  <div class="order-item" *ngFor="let order of orders">
+    <span>{{ order.name }}</span>
+    <span>{{ order.qty }}</span>
+    <span>${{ order.price }}</span>
+  </div>
+
+  <button mat-button>
+    Continue to Payment
+  </button>
+</div>

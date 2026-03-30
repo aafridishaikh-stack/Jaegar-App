@@ -1,0 +1,72 @@
+<!-- Dashboard Main Layout -->
+<div class="dashboard-container">
+
+  <!-- ===== LEFT COLUMN: Header + Menu ===== -->
+  <div class="main-left">
+    
+    <!-- Local Header (Brand + Search) -->
+    <app-header></app-header>
+
+    <section class="menu-section">
+      <!-- Category Tabs (Moved above Choose Dishes as per feedback) -->
+      <nav class="category-tabs">
+        <button
+          *ngFor="let cat of categories"
+          [class.active]="cat === selectedCategory"
+          (click)="selectCategory(cat)"
+        >{{ cat }}</button>
+      </nav>
+
+      <!-- Sub-header row -->
+      <div class="menu-header">
+        <h2>Choose Dishes</h2>
+        <div class="dine-btn" (click)="toggleDropdown()">
+          <img src="/arrow-ios-down.svg" alt="Caret-Down icon" width="20" height="20">
+          <span>{{ selectedType }}</span>
+          
+          <!-- Dropdown items (Added for functionality) -->
+          <div class="dropdown-menu" *ngIf="isDropdownOpen">
+            <div class="dropdown-item" (click)="selectTypeFromDropdown('Dine In', $event)">Dine In</div>
+            <div class="dropdown-item" (click)="selectTypeFromDropdown('To Go', $event)">To Go</div>
+            <div class="dropdown-item" (click)="selectTypeFromDropdown('Delivery', $event)">Delivery</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Food Grid -->
+      <div class="food-scroll">
+        <div class="food-grid">
+          <app-food-card
+            *ngFor="let item of filteredFoods"
+            [food]="item"
+            (click)="addToCart(item)"
+          ></app-food-card>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== RIGHT COLUMN: Order Panel (Full Height) ===== -->
+  <app-order-panel
+    [orders]="orders"
+    [selectedType]="selectedType"
+    [subTotal]="subTotal"
+    (typeChange)="selectType($event)"
+    (remove)="removeFromCart($event)"
+    (continue)="continueToPayment()"
+  />
+
+</div>
+
+<app-payment-popup
+  [isOpen]="isPaymentOpen"
+  [orders]="orders"
+  [subTotal]="subTotal"
+  [selectedType]="selectedType"
+  [selectedPaymentMethod]="selectedPaymentMethod"
+  (close)="closePayment()"
+  (confirm)="confirmPayment()"
+  (selectPaymentMethod)="selectPaymentMethod($event)"
+  (typeChange)="selectType($event)"
+  (remove)="removeFromCart($event)"
+/>

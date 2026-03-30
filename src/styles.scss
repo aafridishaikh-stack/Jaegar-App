@@ -1,1 +1,151 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap');
+
+/* Design tokens (SASS + CSS custom properties) */
+$color-bg-deep: #1f1d2b;
+$color-bg-content: #252836;
+$color-bg-surface: #2d303e;
+$color-bg-contrast: #1b1a25;
+$color-border: #393c49;
+$color-border-strong: #2f3240;
+$color-accent: #ea7c69;
+$color-danger: #ff7ca3;
+$color-text-white: #ffffff;
+$color-text-light: #e0e6e9;
+$color-text-muted: #abbbc2;
+$color-text-placeholder: #808191;
+$color-text-subtle: #a9b3c3;
+$color-text-cool: #8997c4;
+$color-shadow: rgba(0, 0, 0, 0.4);
+$color-overlay: rgba(0, 0, 0, 0.7);
+$font-base: 'Barlow', sans-serif;
+
+/* Minimal Material theme kept invisible; only enables components, colors stay close to existing palette */
+$app-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$blue-palette,
+    tertiary: mat.$orange-palette,
+  ),
+  density: (scale: 0),
+));
+
+@include mat.core();
+@include mat.button-theme($app-theme);
+
+/* Neutralize default MatButton look so existing styling wins */
+.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-unelevated-button, .mat-mdc-outlined-button {
+  text-transform: none;
+  min-width: 0;
+  padding: 0;
+  border-radius: inherit;
+  box-shadow: none;
+}
+.mat-mdc-button .mdc-button__label { font-weight: inherit; }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-deep:        #{$color-bg-deep};       /* Sidebar and Order Panel */
+  --bg-content:     #{$color-bg-content};    /* Main content area */
+  --bg-surface:     #{$color-bg-surface};    /* Inputs / cards */
+  --bg-contrast:    #{$color-bg-contrast};   /* Gradient low tone */
+  --accent:         #{$color-accent};        /* Primary orange */
+  --danger:         #{$color-danger};        /* Delete buttons */
+  --text-white:     #{$color-text-white};
+  --text-muted:     #{$color-text-muted};
+  --text-light:     #{$color-text-light};
+  --text-placeholder:#{$color-text-placeholder};
+  --text-subtle:    #{$color-text-subtle};
+  --text-cool:      #{$color-text-cool};
+  --border:         #{$color-border};
+  --border-strong:  #{$color-border-strong};
+  --shadow-strong:  #{$color-shadow};
+  --overlay:        #{$color-overlay};
+  --font-base:      #{$font-base};
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background: var(--bg-content);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; }
+input, select, textarea { font-family: inherit; outline: none; }
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent) !important;
+}
+
+::-webkit-scrollbar { width: 0px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+/* Global Category Tabs (Jaegar Resto) */
+.category-tabs {
+  display: flex !important;
+  gap: 4px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  // margin-bottom: 8px;
+  flex-shrink: 0;
+
+  button {
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-white) !important;
+    font-size: 14px !important;
+    font-weight: 600;
+    padding: 5px 32px 11px 0px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: color 0.2s;
+    white-space: nowrap;
+    position: relative;
+    box-shadow: none !important;
+
+    &:hover {
+      color: var(--accent) !important;
+    }
+
+    &.active {
+      color: var(--accent) !important;
+      font-weight: 600;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0px; /* Align with text start (padding-left) */
+        width: 37px; /* Fixed width or approx 50% of typical tab text */
+        height: 3px;
+        background: var(--accent);
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
+/* Shared shells and placeholders for secondary pages */
+.page-shell { display: flex; flex: 1; }
+.page-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: var(--text-white);
+  font-size: 24px;
+  font-family: var(--font-base);
+}

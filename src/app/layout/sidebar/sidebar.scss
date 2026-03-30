@@ -1,0 +1,118 @@
+.sidebar {
+  width: 104px;
+  background: var(--bg-deep);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  width: 100%;
+  padding: 24px 0;
+}
+
+.nav-item {
+  text-decoration: none;
+  width: calc(100% - 12px);
+  margin-left: 12px; /* maintain inset while visually centering */
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--accent);
+  transition: all 0.2s ease;
+  position: relative;
+  border-radius: 12px;
+  
+
+  &.active {
+    background: var(--bg-content);
+    /* Matches content bg */
+    color: var(--text-white);
+
+    .icon-box {
+      background: var(--accent);
+      color: var(--text-white);
+      box-shadow: 0 8px 24px rgba(234, 124, 105, 0.32);
+      z-index: 2;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--bg-deep); /* sidebar color to carve outer edge */
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Top carve */
+    &::before {
+      top: -24px;
+      border-radius: 0 0 28px 0;
+      box-shadow: 12px 12px 0 12px var(--bg-content); /* fill inner area with active bg to form smooth curve */
+    }
+
+    /* Bottom carve */
+    &::after {
+      bottom: -24px;
+      border-radius: 0 28px 0 0;
+      box-shadow: 12px -12px 0 12px var(--bg-content);
+    }
+  }
+
+  .icon-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -12px;
+
+    img {
+      filter: invert(58%) sepia(48%) saturate(600%) hue-rotate(322deg) brightness(100%);
+      transition: filter 0.2s ease;
+    }
+  }
+
+  &.active .icon-box img {
+    filter: brightness(0) invert(1);
+  }
+
+  &:not(.active):hover .icon-box {
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+}
+
+.nav-logout {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--accent);
+  transition: all 0.2s;
+  margin-top: auto;
+  border-radius: 12px;
+  // padding-left: 12px;
+
+  &:hover {
+    color: var(--text-white);
+    background: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+}

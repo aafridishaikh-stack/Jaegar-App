@@ -1,0 +1,162 @@
+<div class="payment-overlay" [class.open]="isOpen">
+  <div class="payment-backdrop" (click)="close.emit()"></div>
+  <div class="payment-sheet">
+    <!-- Left: Confirmation -->
+    <section class="pay-left">
+      <header class="pay-header">
+        <button class="back-btn" (click)="close.emit()">
+          <img src="/Back.svg" alt="Back" width="24" height="24">
+        </button>
+        <div class="header-inner">
+          <div class="header-titles">
+            <h2>Confirmation</h2>
+            <p>Orders #34562</p>
+          </div>
+          <button class="add-btn" (click)="close.emit()">
+            <img src="/Plus.svg" alt="Add" width="20" height="20">
+          </button>
+        </div>
+      </header>
+
+      <div class="section-divider left-divider"></div>
+
+      <div class="confirm-list">
+        <div class="order-item" *ngFor="let order of orders; let i = index">
+          <div class="order-main-row">
+            <img [src]="order.food.image" [alt]="order.food.name" />
+            <div class="order-info">
+              <h4>{{ order.food.name | slice:0:20 }}{{ order.food.name.length > 20 ? '...' : '' }}</h4>
+              <small>$ {{ order.food.price.toFixed(2) }}</small>
+            </div>
+            <div class="qty-badge">{{ order.qty }}</div>
+            <span class="item-total">$ {{ (order.food.price * order.qty).toFixed(2) }}</span>
+          </div>
+          <div class="order-action-row">
+            <input
+              type="text"
+              class="note-input"
+              [placeholder]="i === 0 ? 'Please, just a little bit spicy only.' : 'Order Note...'"
+              [(ngModel)]="order.note"
+            />
+            <button class="delete-btn" (click)="removeItem(i, $event)">
+              <img src="/Trash.svg" alt="Delete" height="20" width="20">
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="confirm-summary">
+        <div class="summary-row">
+          <span>Discount</span>
+          <strong>$0</strong>
+        </div>
+        <div class="summary-row subtotal">
+          <span>Sub total</span>
+          <strong>$ {{ subTotal.toFixed(2) }}</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Payment -->
+    <section class="pay-right">
+      <div class="pay-right-header">
+        <h2>Payment</h2>
+        <p>3 payment method available</p>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <div class="payment-method-section">
+        <h3>Payment Method</h3>
+        <div class="pay-methods">
+          <div class="method" [class.active]="selectedPaymentMethod === 'credit'" (click)="chooseMethod('credit')">
+            <div class="check-badge" *ngIf="selectedPaymentMethod === 'credit'"></div>
+            <img src="/Card.svg" alt="Credit Card" width="24px" height="24px">
+            <span>Credit Card</span>
+          </div>
+          <div class="method" [class.active]="selectedPaymentMethod === 'paypal'" (click)="chooseMethod('paypal')">
+             <div class="check-badge" *ngIf="selectedPaymentMethod === 'paypal'"></div>
+            <img src="/Paypal.svg" alt="Paypal" width="24px" height="24px">
+            <span>Paypal</span>
+          </div>
+          <div class="method" [class.active]="selectedPaymentMethod === 'cash'" (click)="chooseMethod('cash')">
+             <div class="check-badge" *ngIf="selectedPaymentMethod === 'cash'"></div>
+            <img src="/Wallet.svg" alt="Cash" width="24px" height="24px">
+            <span>Cash</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="payment-form" *ngIf="selectedPaymentMethod === 'credit'">
+        <div class="form-group">
+          <label>Cardholder Name</label>
+          <input type="text" placeholder="Levi Ackerman" />
+        </div>
+        <div class="form-group">
+          <label>Card Number</label>
+          <input type="text" placeholder="2564 1421 0897 1244" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Expiration Date</label>
+            <div class="expiry-wrapper" (click)="openExpiry($event)">
+              <input
+                type="text"
+                [value]="expiryDisplay"
+                placeholder="MM/YYYY"
+                readonly
+                class="expiry-input"
+              />
+              <div class="expiry-picker" *ngIf="isExpiryOpen" (click)="$event.stopPropagation()">
+                <div class="picker-header">
+                  <button type="button" (click)="prevYear()">&#8249;</button>
+                  <span>{{ pickerYear }}</span>
+                  <button type="button" (click)="nextYear()">&#8250;</button>
+                </div>
+                <div class="picker-months">
+                  <button
+                    type="button"
+                    *ngFor="let m of months; let i = index"
+                    [class.selected]="selectedExpiryMonth === i + 1 && selectedExpiryYear === pickerYear"
+                    (click)="selectMonth(i)"
+                  >{{ m }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>CVV</label>
+            <input type="password" placeholder="•••" />
+          </div>
+        </div>
+        <div class="form-row border-top">
+          <div class="form-group">
+            <label>Order Type</label>
+            <div class="custom-select" (click)="toggleTypeDropdown($event)" [class.open]="isTypeDropdownOpen">
+              <img src="/arrow-ios-down.svg" alt="Caret-Down">
+              <span>{{ selectedType }}</span>
+              <div class="dropdown" *ngIf="isTypeDropdownOpen">
+                <div class="dropdown-item" (click)="chooseType('Dine In', $event)">Dine In</div>
+                <div class="dropdown-item" (click)="chooseType('To Go', $event)">To Go</div>
+                <div class="dropdown-item" (click)="chooseType('Delivery', $event)">Delivery</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Table no.</label>
+            <input type="text" placeholder="140" />
+          </div>
+        </div>
+      </form>
+
+      <div class="payment-placeholder" *ngIf="selectedPaymentMethod !== 'credit'">
+        <p>Please proceed to pay via {{ selectedPaymentMethod | titlecase }} on the next screen.</p>
+      </div>
+
+      <div class="pay-actions">
+        <button mat-button class="cancel-btn" (click)="close.emit()">Cancel</button>
+        <button mat-button class="confirm-btn" (click)="confirm.emit()">Confirm Payment</button>
+      </div>
+    </section>
+  </div>
+</div>

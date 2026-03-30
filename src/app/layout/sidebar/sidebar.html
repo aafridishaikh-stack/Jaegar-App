@@ -1,0 +1,47 @@
+<div class="sidebar">
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <div class="logo-icon">
+      <img src="/Logo.png" alt="Logo" width="56" height="56">
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav-menu">
+    <a class="nav-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" title="Dashboard">
+      <div class="icon-box">
+        <img src="/Home.svg" alt="Dashboard home icon" width="24" height="24">
+      </div>
+    </a>
+    <a class="nav-item" routerLink="/discount" routerLinkActive="active" title="Discount">
+      <div class="icon-box">
+        <img src="/Discount.svg" alt="Discount icon" width="24" height="24">
+      </div>
+    </a>
+    <a class="nav-item" routerLink="/analytics" routerLinkActive="active" title="Analytics">
+      <div class="icon-box">
+        <img src="/Dashboard.svg" alt="Analytics icon" width="24" height="24">
+      </div>
+    </a>
+    <a class="nav-item" routerLink="/messages" routerLinkActive="active" title="Messages">
+      <div class="icon-box">
+        <img src="/Message.svg" alt="Messages icon" width="24" height="24">
+      </div>
+    </a>
+    <a class="nav-item" routerLink="/notifications" routerLinkActive="active" title="Notifications">
+      <div class="icon-box">
+        <img src="/Notification.svg" alt="Notifications icon" width="24" height="24">
+      </div>
+    </a>
+    <a class="nav-item" routerLink="/settings" routerLinkActive="active" title="Settings">
+      <div class="icon-box">
+        <img src="/Setting.svg" alt="Settings icon" width="24" height="24">
+      </div>
+    </a>
+  </nav>
+
+  <!-- Logout -->
+  <div class="nav-logout" title="Logout">
+    <img src="/Log-Out.svg" alt="Logout icon" width="24" height="24">
+  </div>
+</div>

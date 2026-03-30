@@ -1,0 +1,67 @@
+<aside class="order-panel">
+  <!-- Order header -->
+  <div class="order-header">
+    <h2>Orders #34562</h2>
+    <div class="order-type-tabs">
+      <button class="type-tab" [class.active]="selectedType === 'Dine In'" (click)="selectType('Dine In')">Dine In</button>
+      <button class="type-tab" [class.active]="selectedType === 'To Go'" (click)="selectType('To Go')">To Go</button>
+      <button class="type-tab" [class.active]="selectedType === 'Delivery'" (click)="selectType('Delivery')">Delivery</button>
+    </div>
+  </div>
+
+  <!-- Column labels -->
+  <div class="order-labels">
+    <span class="label-item">Item</span>
+    <span class="label-qty">Qty</span>
+    <span class="label-price">Price</span>
+  </div>
+
+  <!-- Order items list -->
+  <div class="order-items-wrap">
+    <div *ngIf="orders.length === 0" class="empty-state">
+      <p>No items yet. Tap a dish to start your order.</p>
+    </div>
+
+    <div class="order-item" *ngFor="let order of orders; let i = index">
+      <div class="order-main-row">
+        <img [src]="order.food.image" [alt]="order.food.name" />
+        <div class="order-info">
+          <h4>{{ order.food.name | slice:0:20 }}{{ order.food.name.length > 20 ? '...' : '' }}</h4>
+          <small>$ {{ order.food.price.toFixed(2) }}</small>
+        </div>
+        <div class="qty-badge">{{ order.qty }}</div>
+        <span class="item-total">$ {{ (order.food.price * order.qty).toFixed(2) }}</span>
+      </div>
+      <div class="order-action-row">
+        <input
+          type="text"
+          class="note-input"
+          [placeholder]="i === 0 ? 'Please, just a little bit spicy only.' : 'Order Note...'"
+          [(ngModel)]="order.note"
+        />
+        <button class="delete-btn" (click)="removeItem(i, $event)">
+          <img src="/Trash.svg" alt="Delete" height="20px" width="20px">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="order-summary">
+    <div class="summary-row">
+      <span>Discount</span>
+      <strong>$0</strong>
+    </div>
+    <div class="summary-row subtotal">
+      <span>Sub total</span>
+      <strong>$ {{ subTotal.toFixed(2) }}</strong>
+    </div>
+  </div>
+
+  <!-- Footer (sticky) -->
+  <div class="order-footer">
+    <button mat-button class="continue-btn" [disabled]="orders.length === 0" (click)="continueToPayment()">
+      Continue to Payment
+    </button>
+  </div>
+</aside>

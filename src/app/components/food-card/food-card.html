@@ -1,0 +1,10 @@
+<div class="food-card">
+  <div class="card-img-wrap">
+    <img [src]="food.image" [alt]="food.name" />
+  </div>
+  <div class="card-body">
+    <h3>{{ food.name }}</h3>
+    <p class="price">$ {{ food.price.toFixed(2) }}</p>
+    <span class="availability">{{ food.available }} Bowls available</span>
+  </div>
+</div>
