@@ -1,8 +1,8 @@
 .dashboard-container {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 410px; /* Precise width for order panel */
+  grid-template-columns: minmax(0, 1fr) 410px;
   gap: 0;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
   background: var(--bg-content);
 }
@@ -22,21 +22,21 @@ app-header {
   flex-shrink: 0;
 }
 
+.order-panel-inline { display: none; }
+.order-panel-desktop { display: block; }
+
 /* LEFT – Menu Section */
 .menu-section {
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  // padding: 0 32px 24px; /* Balanced side padding */
   overflow: hidden;
   gap: 24px;
 
-  /* Category tabs (Now above Choose Dishes) */
   .category-tabs {
     margin-top: 0;
-    // margin-bottom: 16px;
     border-bottom: 1px solid var(--border);
-    // padding-bottom: 4px;
   }
 }
 
@@ -89,9 +89,8 @@ app-header {
 
 .food-scroll {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  // padding-right: 10px;
-  // margin-right: -10px;
 
   .food-grid {
     display: grid;
@@ -118,28 +117,32 @@ app-header {
 @media (max-width: 900px) {
   .dashboard-container {
     grid-template-columns: 1fr;
-    height: auto;
-    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
   }
 
   .main-left {
     padding: 16px;
+    height: 100%;
+    overflow: hidden;
   }
 
   .menu-section {
-    flex: 1 1 auto;
+    flex: 1;
+    min-height: 0;
     overflow: hidden;
   }
 
   .food-scroll {
-    max-height: none;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
     margin-right: 0;
     padding-right: 0;
   }
 
-  app-order-panel {
-    margin-top: 24px;
-  }
+  .order-panel-desktop { display: none; }
+  .order-panel-inline { display: block; }
 }
 
 @media (max-width: 600px) {

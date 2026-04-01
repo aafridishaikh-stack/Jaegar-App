@@ -42,12 +42,24 @@
             (click)="addToCart(item)"
           ></app-food-card>
         </div>
+
+        <!-- Order Panel below food cards on small screens -->
+        <app-order-panel
+          class="order-panel-inline"
+          [orders]="orders"
+          [selectedType]="selectedType"
+          [subTotal]="subTotal"
+          (typeChange)="selectType($event)"
+          (remove)="removeFromCart($event)"
+          (continue)="continueToPayment()"
+        />
       </div>
     </section>
   </div>
 
-  <!-- ===== RIGHT COLUMN: Order Panel (Full Height) ===== -->
+  <!-- ===== RIGHT COLUMN: Order Panel (Full Height, desktop only) ===== -->
   <app-order-panel
+    class="order-panel-desktop"
     [orders]="orders"
     [selectedType]="selectedType"
     [subTotal]="subTotal"

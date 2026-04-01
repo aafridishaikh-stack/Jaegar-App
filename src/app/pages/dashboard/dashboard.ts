@@ -11,6 +11,7 @@ import { PaymentPopup } from '../../components/payment-popup/payment-popup';
 
 @Component({
   selector: 'app-dashboard',
+  host: { style: 'display:flex; flex-direction:column; flex:1; height:100%; min-height:0;' },
   imports: [
     FoodCard,
     Header,

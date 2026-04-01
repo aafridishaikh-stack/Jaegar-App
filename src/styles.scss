@@ -75,6 +75,13 @@ html, body {
   margin: 0;
 }
 
+@media (max-width: 900px) {
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
 body {
   font-family: var(--font-base);
   background: var(--bg-content);
@@ -99,8 +106,10 @@ input:focus, textarea:focus, select:focus {
   gap: 4px;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  // margin-bottom: 8px;
   flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
 
   button {
     background: transparent !important;
@@ -113,6 +122,7 @@ input:focus, textarea:focus, select:focus {
     border-radius: 0;
     transition: color 0.2s;
     white-space: nowrap;
+    flex-shrink: 0;
     position: relative;
     box-shadow: none !important;
 
@@ -128,8 +138,8 @@ input:focus, textarea:focus, select:focus {
         content: '';
         position: absolute;
         bottom: -2px;
-        left: 0px; /* Align with text start (padding-left) */
-        width: 37px; /* Fixed width or approx 50% of typical tab text */
+        left: 0px;
+        width: 37px;
         height: 3px;
         background: var(--accent);
         border-radius: 3px;
