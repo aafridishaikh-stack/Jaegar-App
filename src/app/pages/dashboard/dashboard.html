@@ -35,9 +35,9 @@
 
       <!-- Food Grid -->
       <div class="food-scroll">
-        <div class="food-grid">
+        <div class="food-grid" [@gridReveal]="selectedCategory">
           <app-food-card
-            *ngFor="let item of filteredFoods"
+            *ngFor="let item of filteredFoods; trackBy: trackByFood"
             [food]="item"
             (click)="addToCart(item)"
           ></app-food-card>
