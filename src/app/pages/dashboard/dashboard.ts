@@ -8,6 +8,7 @@ import { AppStateService, FoodCategory } from '../../services/app-state.service'
 import { Food, OrderItem } from './types';
 import { OrderPanel } from '../../components/order-panel/order-panel';
 import { PaymentPopup } from '../../components/payment-popup/payment-popup';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,20 @@ import { PaymentPopup } from '../../components/payment-popup/payment-popup';
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
+  animations: [
+    trigger('gridReveal', [
+      transition('* => *', [
+        query(
+          ':enter',
+          [
+            style({ opacity: 0, transform: 'translateY(12px) scale(0.985)' }),
+            stagger(60, animate('200ms ease-out', style({ opacity: 1, transform: 'translateY(0) scale(1)' })))
+          ],
+          { optional: true }
+        )
+      ]),
+    ])
+  ],
 })
 export class Dashboard {
   categories: FoodCategory[] = ['Hot Dishes', 'Cold Dishes', 'Soup', 'Grill', 'Appetizer', 'Dessert'];
@@ -180,6 +195,10 @@ export class Dashboard {
 
   selectCategory(category: FoodCategory) {
     this.appState.setCategory(category);
+  }
+
+  trackByFood(i: number, item: Food) {
+    return `${item.name}-${i}`;
   }
 
   get subTotal() {

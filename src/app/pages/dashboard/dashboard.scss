@@ -36,7 +36,8 @@ app-header {
 
   .category-tabs {
     margin-top: 0;
-    border-bottom: 1px solid var(--border);
+    border-bottom: none; /* use global pseudo divider instead */
+    padding-bottom: 8px; /* extra room so underline can sit on the baseline */
   }
 }
 

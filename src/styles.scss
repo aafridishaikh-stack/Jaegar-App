@@ -105,13 +105,27 @@ input:focus, textarea:focus, select:focus {
   display: flex !important;
   gap: 4px;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  padding-bottom: 4px;
+  border-bottom: none;
+  /* Draw the divider under the active pill so ::after can sit on top */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: var(--border);
+    z-index: 0;
+    pointer-events: none;
+  }
   flex-shrink: 0;
   overflow-x: auto;
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
 
   button {
+    position: relative;
+    z-index: 1; /* keeps pills and their ::after above the divider */
     background: transparent !important;
     border: none !important;
     color: var(--text-white) !important;
@@ -137,12 +151,13 @@ input:focus, textarea:focus, select:focus {
       &::after {
         content: '';
         position: absolute;
-        bottom: -2px;
+        bottom: -8px;
         left: 0px;
         width: 37px;
         height: 3px;
         background: var(--accent);
         border-radius: 3px;
+        z-index: 2;
       }
     }
   }
