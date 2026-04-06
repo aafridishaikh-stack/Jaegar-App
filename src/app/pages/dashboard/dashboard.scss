@@ -22,9 +22,6 @@ app-header {
   flex-shrink: 0;
 }
 
-.order-panel-inline { display: none; }
-.order-panel-desktop { display: block; }
-
 /* LEFT – Menu Section */
 .menu-section {
   flex: 1;
@@ -132,6 +129,10 @@ app-header {
     flex: 1;
     min-height: 0;
     overflow: hidden;
+
+    .category-tabs {
+      overflow-x: auto;
+    }
   }
 
   .food-scroll {
@@ -143,13 +144,13 @@ app-header {
   }
 
   .order-panel-desktop { display: none; }
-  .order-panel-inline { display: block; }
 }
 
 @media (max-width: 600px) {
   .food-scroll .food-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    row-gap: 40px;
+    row-gap: 56px;
+    column-gap: 0;
   }
 
   .menu-header h2 {
@@ -162,3 +163,106 @@ app-header {
 }
 
 /* Order panel and payment popup styles are now scoped in their components */
+
+/* ===== MOBILE: Floating Cart Button ===== */
+.fab-cart {
+  display: none;
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(234, 124, 105, 0.5);
+  z-index: 200;
+  transition: transform 0.2s;
+
+  &:hover { transform: scale(1.08); }
+
+  img { filter: brightness(0) invert(1); }
+
+  .fab-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    color: var(--accent);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ===== MOBILE: Order Panel Overlay ===== */
+.mobile-order-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &.open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
+
+.mobile-order-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+}
+
+.mobile-order-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-deep);
+  border-radius: 24px 24px 0 0;
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .mobile-order-overlay.open & {
+    transform: translateY(0);
+  }
+}
+
+.mobile-order-close {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: var(--bg-deep);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 24px 24px 0px 24px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.mobile-order-sheet app-order-panel ::ng-deep .order-header {
+  padding-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .fab-cart { display: flex; }
+  .mobile-order-overlay { display: block; }
+  .order-panel-desktop { display: none !important; }
+}

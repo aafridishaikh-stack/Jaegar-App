@@ -121,6 +121,7 @@ input:focus, textarea:focus, select:focus {
   flex-shrink: 0;
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
   &::-webkit-scrollbar { display: none; }
 
   button {
@@ -163,7 +164,12 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-/* Shared shells and placeholders for secondary pages */
+@media (max-width: 900px) {
+  .category-tabs button {
+    font-size: 12px !important;
+    padding: 5px 16px 11px 0px;
+  }
+}
 .page-shell { display: flex; flex: 1; }
 .page-placeholder {
   display: flex;

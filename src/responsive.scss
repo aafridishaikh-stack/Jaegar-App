@@ -1,0 +1,142 @@
+// ============================================================
+// responsive.scss — All breakpoint overrides in one place
+// ============================================================
+
+// ------ 1200px ------
+@media (max-width: 1200px) {
+  .dashboard-container {
+    grid-template-columns: minmax(0, 1fr) 360px;
+  }
+
+  .food-scroll .food-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 48px;
+  }
+}
+
+// ------ 1100px (Payment Popup) ------
+@media (max-width: 1100px) {
+  .payment-overlay {
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+  }
+
+  .payment-sheet {
+    width: 100%;
+    max-width: 520px;
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+  }
+
+  .pay-left {
+    display: none;
+  }
+
+  .pay-right {
+    padding: 32px 28px 28px;
+  }
+}
+
+// ------ 1280px (tablet landscape & down) ------
+@media (max-width: 1280px) {
+
+  // App layout
+  .app-layout {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .main-content {
+    overflow: hidden;
+  }
+
+  // Sidebar
+  .sidebar {
+    width: 64px;
+    padding: 16px 0;
+  }
+
+  .nav-item {
+    height: 56px;
+
+    .icon-box {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .nav-logout {
+    width: 40px;
+    height: 40px;
+  }
+
+  // Header
+  .brand-text {
+    h1 { font-size: 25px; }
+    p  { font-size: 14px; }
+  }
+
+  // Dashboard
+  .dashboard-container {
+    grid-template-columns: 1fr;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .main-left {
+    padding: 16px;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .menu-section {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .food-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .order-panel-desktop { display: none; }
+  .order-panel-inline  { display: block; }
+}
+
+// ------ 600px ------
+@media (max-width: 600px) {
+
+  // Dashboard
+  .food-scroll .food-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+
+  .menu-header h2 {
+    font-size: 18px;
+  }
+
+  .main-left {
+    padding: 12px;
+  }
+
+  // Payment popup
+  .pay-right {
+    padding: 28px 20px 24px;
+    gap: 24px;
+  }
+
+  .payment-method-section .pay-methods { flex-direction: column; }
+
+  .payment-form .form-row { grid-template-columns: 1fr; }
+
+  .pay-actions {
+    grid-template-columns: 1fr;
+    button { width: 100%; }
+  }
+}

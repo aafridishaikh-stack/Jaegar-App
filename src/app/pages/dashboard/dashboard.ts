@@ -131,6 +131,7 @@ export class Dashboard {
 
   orders: OrderItem[] = [];
   isPaymentOpen = false;
+  isOrderPanelOpen = false;
   isDropdownOpen = false;
   selectedType: 'Dine In' | 'To Go' | 'Delivery' = 'Dine In';
   selectedCategory: FoodCategory = 'Hot Dishes';
