@@ -109,10 +109,35 @@
   transition: all 0.2s;
   margin-top: auto;
   border-radius: 12px;
-  // padding-left: 12px;
 
   &:hover {
     color: var(--text-white);
     background: color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 64px;
+    padding: 16px 0;
+  }
+
+  .nav-menu {
+    padding: 16px 0;
+    gap: 4px;
+  }
+
+  .nav-item {
+    height: 56px;
+
+    .icon-box {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .nav-logout {
+    width: 40px;
+    height: 40px;
   }
 }

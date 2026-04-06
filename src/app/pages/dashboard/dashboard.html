@@ -42,17 +42,6 @@
             (click)="addToCart(item)"
           ></app-food-card>
         </div>
-
-        <!-- Order Panel below food cards on small screens -->
-        <app-order-panel
-          class="order-panel-inline"
-          [orders]="orders"
-          [selectedType]="selectedType"
-          [subTotal]="subTotal"
-          (typeChange)="selectType($event)"
-          (remove)="removeFromCart($event)"
-          (continue)="continueToPayment()"
-        />
       </div>
     </section>
   </div>
@@ -68,6 +57,30 @@
     (continue)="continueToPayment()"
   />
 
+</div>
+
+<!-- ===== MOBILE: Floating Cart Button ===== -->
+<button class="fab-cart" (click)="isOrderPanelOpen = true">
+  <img src="/Order.svg" alt="Cart" width="24" height="24">
+  <span class="fab-badge" *ngIf="orders.length > 0">{{ orders.length }}</span>
+</button>
+
+<!-- ===== MOBILE: Order Panel Overlay ===== -->
+<div class="mobile-order-overlay" [class.open]="isOrderPanelOpen">
+  <div class="mobile-order-backdrop" (click)="isOrderPanelOpen = false"></div>
+  <div class="mobile-order-sheet">
+    <button class="mobile-order-close" (click)="isOrderPanelOpen = false">
+      <img src="/Back.svg" alt="Close" width="24" height="24">
+    </button>
+    <app-order-panel
+      [orders]="orders"
+      [selectedType]="selectedType"
+      [subTotal]="subTotal"
+      (typeChange)="selectType($event)"
+      (remove)="removeFromCart($event)"
+      (continue)="continueToPayment()"
+    />
+  </div>
 </div>
 
 <app-payment-popup
