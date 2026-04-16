@@ -5,7 +5,7 @@
     <section class="pay-left">
       <header class="pay-header">
         <button class="back-btn" (click)="close.emit()">
-          <img src="/Back.svg" alt="Back" width="24" height="24">
+          <img src="Back.svg" alt="Back" width="24" height="24">
         </button>
         <div class="header-inner">
           <div class="header-titles">
@@ -13,7 +13,7 @@
             <p>Orders #34562</p>
           </div>
           <button class="add-btn" (click)="close.emit()">
-            <img src="/Plus.svg" alt="Add" width="20" height="20">
+            <img src="Plus.svg" alt="Add" width="20" height="20">
           </button>
         </div>
       </header>
@@ -39,7 +39,7 @@
               [(ngModel)]="order.note"
             />
             <button class="delete-btn" (click)="removeItem(i, $event)">
-              <img src="/Trash.svg" alt="Delete" height="20" width="20">
+              <img src="Trash.svg" alt="Delete" height="20" width="20">
             </button>
           </div>
         </div>
@@ -71,17 +71,17 @@
         <div class="pay-methods">
           <div class="method" [class.active]="selectedPaymentMethod === 'credit'" (click)="chooseMethod('credit')">
             <div class="check-badge" *ngIf="selectedPaymentMethod === 'credit'"></div>
-            <img src="/Card.svg" alt="Credit Card" width="24px" height="24px">
+            <img src="Card.svg" alt="Credit Card" width="24px" height="24px">
             <span>Credit Card</span>
           </div>
           <div class="method" [class.active]="selectedPaymentMethod === 'paypal'" (click)="chooseMethod('paypal')">
              <div class="check-badge" *ngIf="selectedPaymentMethod === 'paypal'"></div>
-            <img src="/Paypal.svg" alt="Paypal" width="24px" height="24px">
+            <img src="Paypal.svg" alt="Paypal" width="24px" height="24px">
             <span>Paypal</span>
           </div>
           <div class="method" [class.active]="selectedPaymentMethod === 'cash'" (click)="chooseMethod('cash')">
              <div class="check-badge" *ngIf="selectedPaymentMethod === 'cash'"></div>
-            <img src="/Wallet.svg" alt="Cash" width="24px" height="24px">
+            <img src="Wallet.svg" alt="Cash" width="24px" height="24px">
             <span>Cash</span>
           </div>
         </div>
@@ -133,7 +133,7 @@
           <div class="form-group">
             <label>Order Type</label>
             <div class="custom-select" (click)="toggleTypeDropdown($event)" [class.open]="isTypeDropdownOpen">
-              <img src="/arrow-ios-down.svg" alt="Caret-Down">
+              <img src="arrow-ios-down.svg" alt="Caret-Down">
               <span>{{ selectedType }}</span>
               <div class="dropdown" *ngIf="isTypeDropdownOpen">
                 <div class="dropdown-item" (click)="chooseType('Dine In', $event)">Dine In</div>
