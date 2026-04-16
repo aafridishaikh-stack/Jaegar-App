@@ -21,7 +21,7 @@
       <div class="menu-header">
         <h2>Choose Dishes</h2>
         <div class="dine-btn" (click)="toggleDropdown()">
-          <img src="/arrow-ios-down.svg" alt="Caret-Down icon" width="20" height="20">
+          <img src="arrow-ios-down.svg" alt="Caret-Down icon" width="20" height="20">
           <span>{{ selectedType }}</span>
           
           <!-- Dropdown items (Added for functionality) -->
@@ -61,7 +61,7 @@
 
 <!-- ===== MOBILE: Floating Cart Button ===== -->
 <button class="fab-cart" (click)="isOrderPanelOpen = true">
-  <img src="/Order.svg" alt="Cart" width="24" height="24">
+  <img src="Order.svg" alt="Cart" width="24" height="24">
   <span class="fab-badge" *ngIf="orders.length > 0">{{ orders.length }}</span>
 </button>
 
@@ -70,7 +70,7 @@
   <div class="mobile-order-backdrop" (click)="isOrderPanelOpen = false"></div>
   <div class="mobile-order-sheet">
     <button class="mobile-order-close" (click)="isOrderPanelOpen = false">
-      <img src="/Back.svg" alt="Close" width="24" height="24">
+      <img src="Back.svg" alt="Close" width="24" height="24">
     </button>
     <app-order-panel
       [orders]="orders"
